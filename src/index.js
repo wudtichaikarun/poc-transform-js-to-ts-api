@@ -9,6 +9,7 @@ import cors from '@koa/cors'
 import gracefulShutdown from 'http-graceful-shutdown'
 import config from './config'
 import logger from './libraries/logger'
+import useRoutingController from './bootstrap/useRoutingController'
 
 var app = new Koa()
 
@@ -27,6 +28,8 @@ app.use(
     exposeHeaders: ['X-Request-Id'],
   }),
 )
+
+useRoutingController(app)
 
 const server = app.listen(config.port, () => {
   logger.info({ event: 'execute' }, `API server listening on ${config.port}`)
