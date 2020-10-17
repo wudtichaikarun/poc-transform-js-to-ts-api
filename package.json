@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "DEBUG=worker,app* nodemon --ext js,ts --watch src --watch .babelrc --exec babel-node src/index.ts --extensions=.js,.ts | bunyan",
+    "start-dev": "DEBUG=worker,app* nodemon --ext js,ts --watch src --watch .babelrc --exec babel-node src/index.js --extensions=.js,.ts | bunyan",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run start-dev"
   },
@@ -35,9 +35,16 @@
     "nodemon": "^2.0.5"
   },
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.0",
     "babel-polyfill": "6.26.0",
-    "bunyan": "^1.8.14"
+    "bunyan": "^1.8.14",
+    "dotenv": "^8.2.0",
+    "http-graceful-shutdown": "^2.3.2",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-compress": "^5.0.1",
+    "path": "^0.12.7"
   },
   "bugs": {
     "url": "https://github.com/wudtichaikarun/poc-transform-js-to-ts-api/issues"
