@@ -8,8 +8,6 @@ export function getApiDocRoutes(
   info: oa.InfoObject,
   routingControllerOptions?: RoutingControllersOptions,
 ) {
-  console.log(info)
-
   const router = new KoaRouter()
   const spec = buildSpec(info, routingControllerOptions)
 

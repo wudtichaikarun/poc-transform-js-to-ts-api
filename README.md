@@ -6,6 +6,7 @@
 - [x] routing controller
   - example business logic endpoint
   - apidoc endpoints
+- [x] example business domain
 
 ## Getting Start
 
