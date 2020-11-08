@@ -1,6 +1,5 @@
 import 'reflect-metadata'
 import 'babel-polyfill'
-import path from 'path'
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import compress from 'koa-compress'
@@ -36,7 +35,7 @@ mongoConnection(config.database)
       `Connected to ${dbClient.host}:${dbClient.port}/${dbClient.name}`,
     )
   })
-  .catch((e) => {
+  .catch((err) => {
     logger.error({ err, event: 'error' }, 'Unable to connect to database server!')
     process.exit(1)
   })

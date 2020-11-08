@@ -1,11 +1,16 @@
 import { Service } from 'typedi'
+import { ITeam } from '../../models/team/team.model'
 import { ICreateTeam, TeamRepository } from '../../repository/team/team'
 
 @Service()
 export class OdmTeam {
   constructor(protected repo: TeamRepository) {}
   // *** create team
-  private validateCreate() {}
+  private validateCreate() {
+    /**
+     * implement logic validation
+     */
+  }
 
   create({ name, projectId }: ICreateTeam) {
     this.validateCreate()
@@ -26,13 +31,13 @@ export class OdmTeam {
     // one staff can add to many team
   }
 
-  async addStaffs(mongoTeamId: string, staffIds: string[]) {
+  async addStaffs(mongoTeamId: string, staffIds: string[]): Promise<ITeam> {
     await this.validateAddStaffs(mongoTeamId, staffIds)
     return this.repo.addStaffsToTeam(mongoTeamId, staffIds)
   }
 
   // *** find team
-  findAll() {
+  findAll(): Promise<ITeam[]> {
     return this.repo.findAll()
   }
 }
@@ -41,9 +46,13 @@ export class OdmTeam {
 export class WfmTeam {
   constructor(protected repo: TeamRepository) {}
   // *** create team
-  private validateCreate() {}
+  private validateCreate() {
+    /**
+     * implement logic validation
+     */
+  }
 
-  create({ name, projectId }: ICreateTeam) {
+  create({ name, projectId }: ICreateTeam): Promise<ITeam> {
     this.validateCreate()
     return this.repo.crate({ name, projectId })
   }
@@ -57,13 +66,13 @@ export class WfmTeam {
      */
   }
 
-  addStaffs(mongoTeamId: string, staffIds: string[]) {
+  addStaffs(mongoTeamId: string, staffIds: string[]): Promise<ITeam> {
     this.validateAddStaffs()
     return this.repo.addStaffsToTeam(mongoTeamId, staffIds)
   }
 
   // *** find team
-  findAll() {
+  findAll(): Promise<ITeam[]> {
     return this.repo.findAll()
   }
 }

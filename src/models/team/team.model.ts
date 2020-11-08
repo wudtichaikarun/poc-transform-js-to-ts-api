@@ -1,4 +1,4 @@
-import { SchemaDefinition, Schema } from 'mongoose'
+import { SchemaDefinition } from 'mongoose'
 import RepositoryBuilder from 'sendit-mongoose-repository'
 
 export interface ITeam {
