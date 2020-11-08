@@ -4,12 +4,16 @@ import { ICreateTeam, TeamRepository } from '../../repository/team/team'
 @Service()
 export class OdmTeam {
   constructor(protected repo: TeamRepository) {}
+  // *** create team
+  private validateCreate() {}
 
   create({ name, projectId }: ICreateTeam) {
+    this.validateCreate()
     return this.repo.crate({ name, projectId })
   }
 
-  private async allowToAddStaffToTeam(mongoTeamId: string, staffIds: string[]) {
+  // *** add staffs to team
+  private async validateAddStaffs(mongoTeamId: string, staffIds: string[]) {
     const team = await this.repo.findByTeamId(mongoTeamId)
 
     // check staff is exists
@@ -23,10 +27,11 @@ export class OdmTeam {
   }
 
   async addStaffs(mongoTeamId: string, staffIds: string[]) {
-    await this.allowToAddStaffToTeam(mongoTeamId, staffIds)
+    await this.validateAddStaffs(mongoTeamId, staffIds)
     return this.repo.addStaffsToTeam(mongoTeamId, staffIds)
   }
 
+  // *** find team
   findAll() {
     return this.repo.findAll()
   }
@@ -35,12 +40,16 @@ export class OdmTeam {
 @Service()
 export class WfmTeam {
   constructor(protected repo: TeamRepository) {}
+  // *** create team
+  private validateCreate() {}
 
   create({ name, projectId }: ICreateTeam) {
+    this.validateCreate()
     return this.repo.crate({ name, projectId })
   }
 
-  private allowToAddStaffToTeam() {
+  // *** add staffs to team
+  private validateAddStaffs() {
     /**
      * validation
      *  - check staff is exists
@@ -49,10 +58,11 @@ export class WfmTeam {
   }
 
   addStaffs(mongoTeamId: string, staffIds: string[]) {
-    this.allowToAddStaffToTeam()
+    this.validateAddStaffs()
     return this.repo.addStaffsToTeam(mongoTeamId, staffIds)
   }
 
+  // *** find team
   findAll() {
     return this.repo.findAll()
   }
